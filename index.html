@@ -19,7 +19,7 @@ text-align: center;
 }
 </style>
 <body>
-<h1>visualizing schroeter points of four hostels for last 10 years</h1>
+<h1>visualizing schroeter points of four hostels for the last 10 years</h1>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
@@ -40,7 +40,7 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
-var stocks,
+var points,
     symbols;
 
 // A line generator, for the dark stroke.
@@ -61,13 +61,13 @@ var area = d3.svg.area()
     .x(function(d) { return x(d.date); })
     .y1(function(d) { return y(d.price); });
 
-d3.csv("stocks.csv", function(data) {
+d3.csv("points.csv", function(data) {
   var parse = d3.time.format("%b %Y").parse;
 
   // Nest stock values by symbol.
   symbols = d3.nest()
       .key(function(d) { return d.symbol; })
-      .entries(stocks = data);
+      .entries(points = data);
 
   // Parse dates and numbers. We assume values are sorted by date.
   // Also compute the maximum price per symbol, needed for the y-domain.
